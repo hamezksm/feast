@@ -20,7 +20,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Product {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   List<String> get breadcrumbs => throw _privateConstructorUsedError;
   String get imageType => throw _privateConstructorUsedError;
@@ -28,13 +28,13 @@ mixin _$Product {
   List<String> get importantBadges => throw _privateConstructorUsedError;
   int get ingredientCount => throw _privateConstructorUsedError;
   String? get generatedText => throw _privateConstructorUsedError;
-  String get ingredientList => throw _privateConstructorUsedError;
   String get ingredients => throw _privateConstructorUsedError;
+  List<Ingredient> get ingredientList => throw _privateConstructorUsedError;
   int get likes => throw _privateConstructorUsedError;
   String get aisle => throw _privateConstructorUsedError;
-  String get nutrition => throw _privateConstructorUsedError;
+  Nutrition get nutrition => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
-  String get servings => throw _privateConstructorUsedError;
+  Servings get servings => throw _privateConstructorUsedError;
   double get spoonacularScore => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ abstract class $ProductCopyWith<$Res> {
       _$ProductCopyWithImpl<$Res, Product>;
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       String title,
       List<String> breadcrumbs,
       String imageType,
@@ -56,14 +56,17 @@ abstract class $ProductCopyWith<$Res> {
       List<String> importantBadges,
       int ingredientCount,
       String? generatedText,
-      String ingredientList,
       String ingredients,
+      List<Ingredient> ingredientList,
       int likes,
       String aisle,
-      String nutrition,
+      Nutrition nutrition,
       double price,
-      String servings,
+      Servings servings,
       double spoonacularScore});
+
+  $NutritionCopyWith<$Res> get nutrition;
+  $ServingsCopyWith<$Res> get servings;
 }
 
 /// @nodoc
@@ -79,7 +82,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? title = null,
     Object? breadcrumbs = null,
     Object? imageType = null,
@@ -87,8 +90,8 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? importantBadges = null,
     Object? ingredientCount = null,
     Object? generatedText = freezed,
-    Object? ingredientList = null,
     Object? ingredients = null,
+    Object? ingredientList = null,
     Object? likes = null,
     Object? aisle = null,
     Object? nutrition = null,
@@ -97,10 +100,10 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? spoonacularScore = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -129,14 +132,14 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.generatedText
           : generatedText // ignore: cast_nullable_to_non_nullable
               as String?,
-      ingredientList: null == ingredientList
-          ? _value.ingredientList
-          : ingredientList // ignore: cast_nullable_to_non_nullable
-              as String,
       ingredients: null == ingredients
           ? _value.ingredients
           : ingredients // ignore: cast_nullable_to_non_nullable
               as String,
+      ingredientList: null == ingredientList
+          ? _value.ingredientList
+          : ingredientList // ignore: cast_nullable_to_non_nullable
+              as List<Ingredient>,
       likes: null == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
@@ -148,7 +151,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
       nutrition: null == nutrition
           ? _value.nutrition
           : nutrition // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Nutrition,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -156,12 +159,28 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
       servings: null == servings
           ? _value.servings
           : servings // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Servings,
       spoonacularScore: null == spoonacularScore
           ? _value.spoonacularScore
           : spoonacularScore // ignore: cast_nullable_to_non_nullable
               as double,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $NutritionCopyWith<$Res> get nutrition {
+    return $NutritionCopyWith<$Res>(_value.nutrition, (value) {
+      return _then(_value.copyWith(nutrition: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ServingsCopyWith<$Res> get servings {
+    return $ServingsCopyWith<$Res>(_value.servings, (value) {
+      return _then(_value.copyWith(servings: value) as $Val);
+    });
   }
 }
 
@@ -173,7 +192,7 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       String title,
       List<String> breadcrumbs,
       String imageType,
@@ -181,14 +200,19 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       List<String> importantBadges,
       int ingredientCount,
       String? generatedText,
-      String ingredientList,
       String ingredients,
+      List<Ingredient> ingredientList,
       int likes,
       String aisle,
-      String nutrition,
+      Nutrition nutrition,
       double price,
-      String servings,
+      Servings servings,
       double spoonacularScore});
+
+  @override
+  $NutritionCopyWith<$Res> get nutrition;
+  @override
+  $ServingsCopyWith<$Res> get servings;
 }
 
 /// @nodoc
@@ -202,7 +226,7 @@ class __$$ProductImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? title = null,
     Object? breadcrumbs = null,
     Object? imageType = null,
@@ -210,8 +234,8 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? importantBadges = null,
     Object? ingredientCount = null,
     Object? generatedText = freezed,
-    Object? ingredientList = null,
     Object? ingredients = null,
+    Object? ingredientList = null,
     Object? likes = null,
     Object? aisle = null,
     Object? nutrition = null,
@@ -220,10 +244,10 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? spoonacularScore = null,
   }) {
     return _then(_$ProductImpl(
-      null == id
+      freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -252,14 +276,14 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.generatedText
           : generatedText // ignore: cast_nullable_to_non_nullable
               as String?,
-      null == ingredientList
-          ? _value.ingredientList
-          : ingredientList // ignore: cast_nullable_to_non_nullable
-              as String,
       null == ingredients
           ? _value.ingredients
           : ingredients // ignore: cast_nullable_to_non_nullable
               as String,
+      null == ingredientList
+          ? _value._ingredientList
+          : ingredientList // ignore: cast_nullable_to_non_nullable
+              as List<Ingredient>,
       null == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
@@ -271,7 +295,7 @@ class __$$ProductImplCopyWithImpl<$Res>
       null == nutrition
           ? _value.nutrition
           : nutrition // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Nutrition,
       null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -279,7 +303,7 @@ class __$$ProductImplCopyWithImpl<$Res>
       null == servings
           ? _value.servings
           : servings // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Servings,
       null == spoonacularScore
           ? _value.spoonacularScore
           : spoonacularScore // ignore: cast_nullable_to_non_nullable
@@ -300,8 +324,8 @@ class _$ProductImpl extends _Product {
       final List<String> importantBadges,
       this.ingredientCount,
       this.generatedText,
-      this.ingredientList,
       this.ingredients,
+      final List<Ingredient> ingredientList,
       this.likes,
       this.aisle,
       this.nutrition,
@@ -311,13 +335,14 @@ class _$ProductImpl extends _Product {
       : _breadcrumbs = breadcrumbs,
         _badges = badges,
         _importantBadges = importantBadges,
+        _ingredientList = ingredientList,
         super._();
 
   factory _$ProductImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductImplFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final String title;
   final List<String> _breadcrumbs;
@@ -351,25 +376,31 @@ class _$ProductImpl extends _Product {
   @override
   final String? generatedText;
   @override
-  final String ingredientList;
-  @override
   final String ingredients;
+  final List<Ingredient> _ingredientList;
+  @override
+  List<Ingredient> get ingredientList {
+    if (_ingredientList is EqualUnmodifiableListView) return _ingredientList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_ingredientList);
+  }
+
   @override
   final int likes;
   @override
   final String aisle;
   @override
-  final String nutrition;
+  final Nutrition nutrition;
   @override
   final double price;
   @override
-  final String servings;
+  final Servings servings;
   @override
   final double spoonacularScore;
 
   @override
   String toString() {
-    return 'Product(id: $id, title: $title, breadcrumbs: $breadcrumbs, imageType: $imageType, badges: $badges, importantBadges: $importantBadges, ingredientCount: $ingredientCount, generatedText: $generatedText, ingredientList: $ingredientList, ingredients: $ingredients, likes: $likes, aisle: $aisle, nutrition: $nutrition, price: $price, servings: $servings, spoonacularScore: $spoonacularScore)';
+    return 'Product(id: $id, title: $title, breadcrumbs: $breadcrumbs, imageType: $imageType, badges: $badges, importantBadges: $importantBadges, ingredientCount: $ingredientCount, generatedText: $generatedText, ingredients: $ingredients, ingredientList: $ingredientList, likes: $likes, aisle: $aisle, nutrition: $nutrition, price: $price, servings: $servings, spoonacularScore: $spoonacularScore)';
   }
 
   @override
@@ -390,10 +421,10 @@ class _$ProductImpl extends _Product {
                 other.ingredientCount == ingredientCount) &&
             (identical(other.generatedText, generatedText) ||
                 other.generatedText == generatedText) &&
-            (identical(other.ingredientList, ingredientList) ||
-                other.ingredientList == ingredientList) &&
             (identical(other.ingredients, ingredients) ||
                 other.ingredients == ingredients) &&
+            const DeepCollectionEquality()
+                .equals(other._ingredientList, _ingredientList) &&
             (identical(other.likes, likes) || other.likes == likes) &&
             (identical(other.aisle, aisle) || other.aisle == aisle) &&
             (identical(other.nutrition, nutrition) ||
@@ -417,8 +448,8 @@ class _$ProductImpl extends _Product {
       const DeepCollectionEquality().hash(_importantBadges),
       ingredientCount,
       generatedText,
-      ingredientList,
       ingredients,
+      const DeepCollectionEquality().hash(_ingredientList),
       likes,
       aisle,
       nutrition,
@@ -442,7 +473,7 @@ class _$ProductImpl extends _Product {
 
 abstract class _Product extends Product {
   factory _Product(
-      final int id,
+      final int? id,
       final String title,
       final List<String> breadcrumbs,
       final String imageType,
@@ -450,20 +481,20 @@ abstract class _Product extends Product {
       final List<String> importantBadges,
       final int ingredientCount,
       final String? generatedText,
-      final String ingredientList,
       final String ingredients,
+      final List<Ingredient> ingredientList,
       final int likes,
       final String aisle,
-      final String nutrition,
+      final Nutrition nutrition,
       final double price,
-      final String servings,
+      final Servings servings,
       final double spoonacularScore) = _$ProductImpl;
   _Product._() : super._();
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   String get title;
   @override
@@ -479,19 +510,19 @@ abstract class _Product extends Product {
   @override
   String? get generatedText;
   @override
-  String get ingredientList;
-  @override
   String get ingredients;
+  @override
+  List<Ingredient> get ingredientList;
   @override
   int get likes;
   @override
   String get aisle;
   @override
-  String get nutrition;
+  Nutrition get nutrition;
   @override
   double get price;
   @override
-  String get servings;
+  Servings get servings;
   @override
   double get spoonacularScore;
   @override
@@ -507,7 +538,7 @@ Ingredient _$IngredientFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Ingredient {
   String? get description => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   String? get safetyLevel => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -522,7 +553,7 @@ abstract class $IngredientCopyWith<$Res> {
           Ingredient value, $Res Function(Ingredient) then) =
       _$IngredientCopyWithImpl<$Res, Ingredient>;
   @useResult
-  $Res call({String? description, String name, String? safetyLevel});
+  $Res call({String? description, String? name, String? safetyLevel});
 }
 
 /// @nodoc
@@ -539,7 +570,7 @@ class _$IngredientCopyWithImpl<$Res, $Val extends Ingredient>
   @override
   $Res call({
     Object? description = freezed,
-    Object? name = null,
+    Object? name = freezed,
     Object? safetyLevel = freezed,
   }) {
     return _then(_value.copyWith(
@@ -547,10 +578,10 @@ class _$IngredientCopyWithImpl<$Res, $Val extends Ingredient>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       safetyLevel: freezed == safetyLevel
           ? _value.safetyLevel
           : safetyLevel // ignore: cast_nullable_to_non_nullable
@@ -567,7 +598,7 @@ abstract class _$$IngredientImplCopyWith<$Res>
       __$$IngredientImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? description, String name, String? safetyLevel});
+  $Res call({String? description, String? name, String? safetyLevel});
 }
 
 /// @nodoc
@@ -582,19 +613,19 @@ class __$$IngredientImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? description = freezed,
-    Object? name = null,
+    Object? name = freezed,
     Object? safetyLevel = freezed,
   }) {
     return _then(_$IngredientImpl(
-      freezed == description
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      freezed == safetyLevel
+              as String?,
+      safetyLevel: freezed == safetyLevel
           ? _value.safetyLevel
           : safetyLevel // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -605,8 +636,7 @@ class __$$IngredientImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$IngredientImpl extends _Ingredient {
-  const _$IngredientImpl(this.description, this.name, this.safetyLevel)
-      : super._();
+  _$IngredientImpl({this.description, this.name, this.safetyLevel}) : super._();
 
   factory _$IngredientImpl.fromJson(Map<String, dynamic> json) =>
       _$$IngredientImplFromJson(json);
@@ -614,7 +644,7 @@ class _$IngredientImpl extends _Ingredient {
   @override
   final String? description;
   @override
-  final String name;
+  final String? name;
   @override
   final String? safetyLevel;
 
@@ -654,9 +684,11 @@ class _$IngredientImpl extends _Ingredient {
 }
 
 abstract class _Ingredient extends Ingredient {
-  const factory _Ingredient(final String? description, final String name,
-      final String? safetyLevel) = _$IngredientImpl;
-  const _Ingredient._() : super._();
+  factory _Ingredient(
+      {final String? description,
+      final String? name,
+      final String? safetyLevel}) = _$IngredientImpl;
+  _Ingredient._() : super._();
 
   factory _Ingredient.fromJson(Map<String, dynamic> json) =
       _$IngredientImpl.fromJson;
@@ -664,7 +696,7 @@ abstract class _Ingredient extends Ingredient {
   @override
   String? get description;
   @override
-  String get name;
+  String? get name;
   @override
   String? get safetyLevel;
   @override
@@ -679,8 +711,8 @@ Nutrition _$NutritionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Nutrition {
-  List<Nutrient> get nutrients => throw _privateConstructorUsedError;
-  CaloricBreakdown get caloricBreakdown => throw _privateConstructorUsedError;
+  List<Nutrient>? get nutrients => throw _privateConstructorUsedError;
+  CaloricBreakdown? get caloricBreakdown => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -693,9 +725,9 @@ abstract class $NutritionCopyWith<$Res> {
   factory $NutritionCopyWith(Nutrition value, $Res Function(Nutrition) then) =
       _$NutritionCopyWithImpl<$Res, Nutrition>;
   @useResult
-  $Res call({List<Nutrient> nutrients, CaloricBreakdown caloricBreakdown});
+  $Res call({List<Nutrient>? nutrients, CaloricBreakdown? caloricBreakdown});
 
-  $CaloricBreakdownCopyWith<$Res> get caloricBreakdown;
+  $CaloricBreakdownCopyWith<$Res>? get caloricBreakdown;
 }
 
 /// @nodoc
@@ -711,25 +743,29 @@ class _$NutritionCopyWithImpl<$Res, $Val extends Nutrition>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? nutrients = null,
-    Object? caloricBreakdown = null,
+    Object? nutrients = freezed,
+    Object? caloricBreakdown = freezed,
   }) {
     return _then(_value.copyWith(
-      nutrients: null == nutrients
+      nutrients: freezed == nutrients
           ? _value.nutrients
           : nutrients // ignore: cast_nullable_to_non_nullable
-              as List<Nutrient>,
-      caloricBreakdown: null == caloricBreakdown
+              as List<Nutrient>?,
+      caloricBreakdown: freezed == caloricBreakdown
           ? _value.caloricBreakdown
           : caloricBreakdown // ignore: cast_nullable_to_non_nullable
-              as CaloricBreakdown,
+              as CaloricBreakdown?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $CaloricBreakdownCopyWith<$Res> get caloricBreakdown {
-    return $CaloricBreakdownCopyWith<$Res>(_value.caloricBreakdown, (value) {
+  $CaloricBreakdownCopyWith<$Res>? get caloricBreakdown {
+    if (_value.caloricBreakdown == null) {
+      return null;
+    }
+
+    return $CaloricBreakdownCopyWith<$Res>(_value.caloricBreakdown!, (value) {
       return _then(_value.copyWith(caloricBreakdown: value) as $Val);
     });
   }
@@ -743,10 +779,10 @@ abstract class _$$NutritionImplCopyWith<$Res>
       __$$NutritionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Nutrient> nutrients, CaloricBreakdown caloricBreakdown});
+  $Res call({List<Nutrient>? nutrients, CaloricBreakdown? caloricBreakdown});
 
   @override
-  $CaloricBreakdownCopyWith<$Res> get caloricBreakdown;
+  $CaloricBreakdownCopyWith<$Res>? get caloricBreakdown;
 }
 
 /// @nodoc
@@ -760,18 +796,18 @@ class __$$NutritionImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? nutrients = null,
-    Object? caloricBreakdown = null,
+    Object? nutrients = freezed,
+    Object? caloricBreakdown = freezed,
   }) {
     return _then(_$NutritionImpl(
-      null == nutrients
+      nutrients: freezed == nutrients
           ? _value._nutrients
           : nutrients // ignore: cast_nullable_to_non_nullable
-              as List<Nutrient>,
-      null == caloricBreakdown
+              as List<Nutrient>?,
+      caloricBreakdown: freezed == caloricBreakdown
           ? _value.caloricBreakdown
           : caloricBreakdown // ignore: cast_nullable_to_non_nullable
-              as CaloricBreakdown,
+              as CaloricBreakdown?,
     ));
   }
 }
@@ -779,23 +815,26 @@ class __$$NutritionImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$NutritionImpl extends _Nutrition {
-  const _$NutritionImpl(final List<Nutrient> nutrients, this.caloricBreakdown)
+  const _$NutritionImpl(
+      {final List<Nutrient>? nutrients, this.caloricBreakdown})
       : _nutrients = nutrients,
         super._();
 
   factory _$NutritionImpl.fromJson(Map<String, dynamic> json) =>
       _$$NutritionImplFromJson(json);
 
-  final List<Nutrient> _nutrients;
+  final List<Nutrient>? _nutrients;
   @override
-  List<Nutrient> get nutrients {
+  List<Nutrient>? get nutrients {
+    final value = _nutrients;
+    if (value == null) return null;
     if (_nutrients is EqualUnmodifiableListView) return _nutrients;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_nutrients);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final CaloricBreakdown caloricBreakdown;
+  final CaloricBreakdown? caloricBreakdown;
 
   @override
   String toString() {
@@ -833,17 +872,18 @@ class _$NutritionImpl extends _Nutrition {
 }
 
 abstract class _Nutrition extends Nutrition {
-  const factory _Nutrition(final List<Nutrient> nutrients,
-      final CaloricBreakdown caloricBreakdown) = _$NutritionImpl;
+  const factory _Nutrition(
+      {final List<Nutrient>? nutrients,
+      final CaloricBreakdown? caloricBreakdown}) = _$NutritionImpl;
   const _Nutrition._() : super._();
 
   factory _Nutrition.fromJson(Map<String, dynamic> json) =
       _$NutritionImpl.fromJson;
 
   @override
-  List<Nutrient> get nutrients;
+  List<Nutrient>? get nutrients;
   @override
-  CaloricBreakdown get caloricBreakdown;
+  CaloricBreakdown? get caloricBreakdown;
   @override
   @JsonKey(ignore: true)
   _$$NutritionImplCopyWith<_$NutritionImpl> get copyWith =>
@@ -856,10 +896,10 @@ Nutrient _$NutrientFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Nutrient {
-  String get name => throw _privateConstructorUsedError;
-  double get amount => throw _privateConstructorUsedError;
-  String get unit => throw _privateConstructorUsedError;
-  double get percentOfDailyNeeds => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  double? get amount => throw _privateConstructorUsedError;
+  String? get unit => throw _privateConstructorUsedError;
+  double? get percentOfDailyNeeds => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -873,7 +913,10 @@ abstract class $NutrientCopyWith<$Res> {
       _$NutrientCopyWithImpl<$Res, Nutrient>;
   @useResult
   $Res call(
-      {String name, double amount, String unit, double percentOfDailyNeeds});
+      {String? name,
+      double? amount,
+      String? unit,
+      double? percentOfDailyNeeds});
 }
 
 /// @nodoc
@@ -889,28 +932,28 @@ class _$NutrientCopyWithImpl<$Res, $Val extends Nutrient>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? amount = null,
-    Object? unit = null,
-    Object? percentOfDailyNeeds = null,
+    Object? name = freezed,
+    Object? amount = freezed,
+    Object? unit = freezed,
+    Object? percentOfDailyNeeds = freezed,
   }) {
     return _then(_value.copyWith(
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      amount: null == amount
+              as String?,
+      amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as double,
-      unit: null == unit
+              as double?,
+      unit: freezed == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
-              as String,
-      percentOfDailyNeeds: null == percentOfDailyNeeds
+              as String?,
+      percentOfDailyNeeds: freezed == percentOfDailyNeeds
           ? _value.percentOfDailyNeeds
           : percentOfDailyNeeds // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
     ) as $Val);
   }
 }
@@ -924,7 +967,10 @@ abstract class _$$NutrientImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name, double amount, String unit, double percentOfDailyNeeds});
+      {String? name,
+      double? amount,
+      String? unit,
+      double? percentOfDailyNeeds});
 }
 
 /// @nodoc
@@ -938,28 +984,28 @@ class __$$NutrientImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? amount = null,
-    Object? unit = null,
-    Object? percentOfDailyNeeds = null,
+    Object? name = freezed,
+    Object? amount = freezed,
+    Object? unit = freezed,
+    Object? percentOfDailyNeeds = freezed,
   }) {
     return _then(_$NutrientImpl(
-      null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == amount
+              as String?,
+      amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as double,
-      null == unit
+              as double?,
+      unit: freezed == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == percentOfDailyNeeds
+              as String?,
+      percentOfDailyNeeds: freezed == percentOfDailyNeeds
           ? _value.percentOfDailyNeeds
           : percentOfDailyNeeds // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
     ));
   }
 }
@@ -968,20 +1014,20 @@ class __$$NutrientImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$NutrientImpl extends _Nutrient {
   const _$NutrientImpl(
-      this.name, this.amount, this.unit, this.percentOfDailyNeeds)
+      {this.name, this.amount, this.unit, this.percentOfDailyNeeds})
       : super._();
 
   factory _$NutrientImpl.fromJson(Map<String, dynamic> json) =>
       _$$NutrientImplFromJson(json);
 
   @override
-  final String name;
+  final String? name;
   @override
-  final double amount;
+  final double? amount;
   @override
-  final String unit;
+  final String? unit;
   @override
-  final double percentOfDailyNeeds;
+  final double? percentOfDailyNeeds;
 
   @override
   String toString() {
@@ -1020,21 +1066,24 @@ class _$NutrientImpl extends _Nutrient {
 }
 
 abstract class _Nutrient extends Nutrient {
-  const factory _Nutrient(final String name, final double amount,
-      final String unit, final double percentOfDailyNeeds) = _$NutrientImpl;
+  const factory _Nutrient(
+      {final String? name,
+      final double? amount,
+      final String? unit,
+      final double? percentOfDailyNeeds}) = _$NutrientImpl;
   const _Nutrient._() : super._();
 
   factory _Nutrient.fromJson(Map<String, dynamic> json) =
       _$NutrientImpl.fromJson;
 
   @override
-  String get name;
+  String? get name;
   @override
-  double get amount;
+  double? get amount;
   @override
-  String get unit;
+  String? get unit;
   @override
-  double get percentOfDailyNeeds;
+  double? get percentOfDailyNeeds;
   @override
   @JsonKey(ignore: true)
   _$$NutrientImplCopyWith<_$NutrientImpl> get copyWith =>
@@ -1047,9 +1096,9 @@ CaloricBreakdown _$CaloricBreakdownFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CaloricBreakdown {
-  double get percentProtein => throw _privateConstructorUsedError;
-  double get percentFat => throw _privateConstructorUsedError;
-  double get percentCarbs => throw _privateConstructorUsedError;
+  double? get percentProtein => throw _privateConstructorUsedError;
+  double? get percentFat => throw _privateConstructorUsedError;
+  double? get percentCarbs => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1063,7 +1112,7 @@ abstract class $CaloricBreakdownCopyWith<$Res> {
           CaloricBreakdown value, $Res Function(CaloricBreakdown) then) =
       _$CaloricBreakdownCopyWithImpl<$Res, CaloricBreakdown>;
   @useResult
-  $Res call({double percentProtein, double percentFat, double percentCarbs});
+  $Res call({double? percentProtein, double? percentFat, double? percentCarbs});
 }
 
 /// @nodoc
@@ -1079,23 +1128,23 @@ class _$CaloricBreakdownCopyWithImpl<$Res, $Val extends CaloricBreakdown>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? percentProtein = null,
-    Object? percentFat = null,
-    Object? percentCarbs = null,
+    Object? percentProtein = freezed,
+    Object? percentFat = freezed,
+    Object? percentCarbs = freezed,
   }) {
     return _then(_value.copyWith(
-      percentProtein: null == percentProtein
+      percentProtein: freezed == percentProtein
           ? _value.percentProtein
           : percentProtein // ignore: cast_nullable_to_non_nullable
-              as double,
-      percentFat: null == percentFat
+              as double?,
+      percentFat: freezed == percentFat
           ? _value.percentFat
           : percentFat // ignore: cast_nullable_to_non_nullable
-              as double,
-      percentCarbs: null == percentCarbs
+              as double?,
+      percentCarbs: freezed == percentCarbs
           ? _value.percentCarbs
           : percentCarbs // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
     ) as $Val);
   }
 }
@@ -1108,7 +1157,7 @@ abstract class _$$CaloricBreakdownImplCopyWith<$Res>
       __$$CaloricBreakdownImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double percentProtein, double percentFat, double percentCarbs});
+  $Res call({double? percentProtein, double? percentFat, double? percentCarbs});
 }
 
 /// @nodoc
@@ -1122,23 +1171,23 @@ class __$$CaloricBreakdownImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? percentProtein = null,
-    Object? percentFat = null,
-    Object? percentCarbs = null,
+    Object? percentProtein = freezed,
+    Object? percentFat = freezed,
+    Object? percentCarbs = freezed,
   }) {
     return _then(_$CaloricBreakdownImpl(
-      null == percentProtein
+      percentProtein: freezed == percentProtein
           ? _value.percentProtein
           : percentProtein // ignore: cast_nullable_to_non_nullable
-              as double,
-      null == percentFat
+              as double?,
+      percentFat: freezed == percentFat
           ? _value.percentFat
           : percentFat // ignore: cast_nullable_to_non_nullable
-              as double,
-      null == percentCarbs
+              as double?,
+      percentCarbs: freezed == percentCarbs
           ? _value.percentCarbs
           : percentCarbs // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
     ));
   }
 }
@@ -1147,18 +1196,18 @@ class __$$CaloricBreakdownImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CaloricBreakdownImpl extends _CaloricBreakdown {
   const _$CaloricBreakdownImpl(
-      this.percentProtein, this.percentFat, this.percentCarbs)
+      {this.percentProtein, this.percentFat, this.percentCarbs})
       : super._();
 
   factory _$CaloricBreakdownImpl.fromJson(Map<String, dynamic> json) =>
       _$$CaloricBreakdownImplFromJson(json);
 
   @override
-  final double percentProtein;
+  final double? percentProtein;
   @override
-  final double percentFat;
+  final double? percentFat;
   @override
-  final double percentCarbs;
+  final double? percentCarbs;
 
   @override
   String toString() {
@@ -1200,20 +1249,20 @@ class _$CaloricBreakdownImpl extends _CaloricBreakdown {
 
 abstract class _CaloricBreakdown extends CaloricBreakdown {
   const factory _CaloricBreakdown(
-      final double percentProtein,
-      final double percentFat,
-      final double percentCarbs) = _$CaloricBreakdownImpl;
+      {final double? percentProtein,
+      final double? percentFat,
+      final double? percentCarbs}) = _$CaloricBreakdownImpl;
   const _CaloricBreakdown._() : super._();
 
   factory _CaloricBreakdown.fromJson(Map<String, dynamic> json) =
       _$CaloricBreakdownImpl.fromJson;
 
   @override
-  double get percentProtein;
+  double? get percentProtein;
   @override
-  double get percentFat;
+  double? get percentFat;
   @override
-  double get percentCarbs;
+  double? get percentCarbs;
   @override
   @JsonKey(ignore: true)
   _$$CaloricBreakdownImplCopyWith<_$CaloricBreakdownImpl> get copyWith =>
@@ -1226,10 +1275,10 @@ Servings _$ServingsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Servings {
-  int get number => throw _privateConstructorUsedError;
-  int get size => throw _privateConstructorUsedError;
-  String get unit => throw _privateConstructorUsedError;
-  String get raw => throw _privateConstructorUsedError;
+  int? get number => throw _privateConstructorUsedError;
+  int? get size => throw _privateConstructorUsedError;
+  String? get unit => throw _privateConstructorUsedError;
+  String? get raw => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1242,7 +1291,7 @@ abstract class $ServingsCopyWith<$Res> {
   factory $ServingsCopyWith(Servings value, $Res Function(Servings) then) =
       _$ServingsCopyWithImpl<$Res, Servings>;
   @useResult
-  $Res call({int number, int size, String unit, String raw});
+  $Res call({int? number, int? size, String? unit, String? raw});
 }
 
 /// @nodoc
@@ -1258,28 +1307,28 @@ class _$ServingsCopyWithImpl<$Res, $Val extends Servings>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? number = null,
-    Object? size = null,
-    Object? unit = null,
-    Object? raw = null,
+    Object? number = freezed,
+    Object? size = freezed,
+    Object? unit = freezed,
+    Object? raw = freezed,
   }) {
     return _then(_value.copyWith(
-      number: null == number
+      number: freezed == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
-              as int,
-      size: null == size
+              as int?,
+      size: freezed == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
-              as int,
-      unit: null == unit
+              as int?,
+      unit: freezed == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
-              as String,
-      raw: null == raw
+              as String?,
+      raw: freezed == raw
           ? _value.raw
           : raw // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -1292,7 +1341,7 @@ abstract class _$$ServingsImplCopyWith<$Res>
       __$$ServingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int number, int size, String unit, String raw});
+  $Res call({int? number, int? size, String? unit, String? raw});
 }
 
 /// @nodoc
@@ -1306,28 +1355,28 @@ class __$$ServingsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? number = null,
-    Object? size = null,
-    Object? unit = null,
-    Object? raw = null,
+    Object? number = freezed,
+    Object? size = freezed,
+    Object? unit = freezed,
+    Object? raw = freezed,
   }) {
     return _then(_$ServingsImpl(
-      null == number
+      number: freezed == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
-              as int,
-      null == size
+              as int?,
+      size: freezed == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
-              as int,
-      null == unit
+              as int?,
+      unit: freezed == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == raw
+              as String?,
+      raw: freezed == raw
           ? _value.raw
           : raw // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -1335,19 +1384,20 @@ class __$$ServingsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ServingsImpl extends _Servings {
-  const _$ServingsImpl(this.number, this.size, this.unit, this.raw) : super._();
+  const _$ServingsImpl({this.number, this.size, this.unit, this.raw})
+      : super._();
 
   factory _$ServingsImpl.fromJson(Map<String, dynamic> json) =>
       _$$ServingsImplFromJson(json);
 
   @override
-  final int number;
+  final int? number;
   @override
-  final int size;
+  final int? size;
   @override
-  final String unit;
+  final String? unit;
   @override
-  final String raw;
+  final String? raw;
 
   @override
   String toString() {
@@ -1384,21 +1434,24 @@ class _$ServingsImpl extends _Servings {
 }
 
 abstract class _Servings extends Servings {
-  const factory _Servings(final int number, final int size, final String unit,
-      final String raw) = _$ServingsImpl;
+  const factory _Servings(
+      {final int? number,
+      final int? size,
+      final String? unit,
+      final String? raw}) = _$ServingsImpl;
   const _Servings._() : super._();
 
   factory _Servings.fromJson(Map<String, dynamic> json) =
       _$ServingsImpl.fromJson;
 
   @override
-  int get number;
+  int? get number;
   @override
-  int get size;
+  int? get size;
   @override
-  String get unit;
+  String? get unit;
   @override
-  String get raw;
+  String? get raw;
   @override
   @JsonKey(ignore: true)
   _$$ServingsImplCopyWith<_$ServingsImpl> get copyWith =>
