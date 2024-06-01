@@ -31,8 +31,9 @@ mixin _$Product {
   String? get category => throw _privateConstructorUsedError;
   int? get ingredientCount => throw _privateConstructorUsedError;
   String? get generatedText => throw _privateConstructorUsedError;
-  List<String>? get ingredients => throw _privateConstructorUsedError;
-  List<Ingredient>? get ingredientList => throw _privateConstructorUsedError;
+  List<IngredientMapEntry>? get ingredientList =>
+      throw _privateConstructorUsedError;
+  List<Ingredient>? get ingredients => throw _privateConstructorUsedError;
   int? get likes => throw _privateConstructorUsedError;
   String? get aisle => throw _privateConstructorUsedError;
   Nutrition? get nutrition => throw _privateConstructorUsedError;
@@ -62,8 +63,8 @@ abstract class $ProductCopyWith<$Res> {
       String? category,
       int? ingredientCount,
       String? generatedText,
-      List<String>? ingredients,
-      List<Ingredient>? ingredientList,
+      List<IngredientMapEntry>? ingredientList,
+      List<Ingredient>? ingredients,
       int? likes,
       String? aisle,
       Nutrition? nutrition,
@@ -99,8 +100,8 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? category = freezed,
     Object? ingredientCount = freezed,
     Object? generatedText = freezed,
-    Object? ingredients = freezed,
     Object? ingredientList = freezed,
+    Object? ingredients = freezed,
     Object? likes = freezed,
     Object? aisle = freezed,
     Object? nutrition = freezed,
@@ -153,13 +154,13 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.generatedText
           : generatedText // ignore: cast_nullable_to_non_nullable
               as String?,
-      ingredients: freezed == ingredients
-          ? _value.ingredients
-          : ingredients // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       ingredientList: freezed == ingredientList
           ? _value.ingredientList
           : ingredientList // ignore: cast_nullable_to_non_nullable
+              as List<IngredientMapEntry>?,
+      ingredients: freezed == ingredients
+          ? _value.ingredients
+          : ingredients // ignore: cast_nullable_to_non_nullable
               as List<Ingredient>?,
       likes: freezed == likes
           ? _value.likes
@@ -232,8 +233,8 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       String? category,
       int? ingredientCount,
       String? generatedText,
-      List<String>? ingredients,
-      List<Ingredient>? ingredientList,
+      List<IngredientMapEntry>? ingredientList,
+      List<Ingredient>? ingredients,
       int? likes,
       String? aisle,
       Nutrition? nutrition,
@@ -269,8 +270,8 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? category = freezed,
     Object? ingredientCount = freezed,
     Object? generatedText = freezed,
-    Object? ingredients = freezed,
     Object? ingredientList = freezed,
+    Object? ingredients = freezed,
     Object? likes = freezed,
     Object? aisle = freezed,
     Object? nutrition = freezed,
@@ -323,13 +324,13 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.generatedText
           : generatedText // ignore: cast_nullable_to_non_nullable
               as String?,
-      freezed == ingredients
-          ? _value._ingredients
-          : ingredients // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       freezed == ingredientList
           ? _value._ingredientList
           : ingredientList // ignore: cast_nullable_to_non_nullable
+              as List<IngredientMapEntry>?,
+      freezed == ingredients
+          ? _value._ingredients
+          : ingredients // ignore: cast_nullable_to_non_nullable
               as List<Ingredient>?,
       freezed == likes
           ? _value.likes
@@ -374,8 +375,8 @@ class _$ProductImpl extends _Product {
       this.category,
       this.ingredientCount,
       this.generatedText,
-      final List<String>? ingredients,
-      final List<Ingredient>? ingredientList,
+      final List<IngredientMapEntry>? ingredientList,
+      final List<Ingredient>? ingredients,
       this.likes,
       this.aisle,
       this.nutrition,
@@ -386,8 +387,8 @@ class _$ProductImpl extends _Product {
         _images = images,
         _badges = badges,
         _importantBadges = importantBadges,
-        _ingredients = ingredients,
         _ingredientList = ingredientList,
+        _ingredients = ingredients,
         super._();
 
   factory _$ProductImpl.fromJson(Map<String, dynamic> json) =>
@@ -445,22 +446,22 @@ class _$ProductImpl extends _Product {
   final int? ingredientCount;
   @override
   final String? generatedText;
-  final List<String>? _ingredients;
+  final List<IngredientMapEntry>? _ingredientList;
   @override
-  List<String>? get ingredients {
-    final value = _ingredients;
+  List<IngredientMapEntry>? get ingredientList {
+    final value = _ingredientList;
     if (value == null) return null;
-    if (_ingredients is EqualUnmodifiableListView) return _ingredients;
+    if (_ingredientList is EqualUnmodifiableListView) return _ingredientList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
-  final List<Ingredient>? _ingredientList;
+  final List<Ingredient>? _ingredients;
   @override
-  List<Ingredient>? get ingredientList {
-    final value = _ingredientList;
+  List<Ingredient>? get ingredients {
+    final value = _ingredients;
     if (value == null) return null;
-    if (_ingredientList is EqualUnmodifiableListView) return _ingredientList;
+    if (_ingredients is EqualUnmodifiableListView) return _ingredients;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -480,7 +481,7 @@ class _$ProductImpl extends _Product {
 
   @override
   String toString() {
-    return 'Product(id: $id, title: $title, breadcrumbs: $breadcrumbs, imageType: $imageType, image: $image, images: $images, badges: $badges, importantBadges: $importantBadges, category: $category, ingredientCount: $ingredientCount, generatedText: $generatedText, ingredients: $ingredients, ingredientList: $ingredientList, likes: $likes, aisle: $aisle, nutrition: $nutrition, price: $price, servings: $servings, spoonacularScore: $spoonacularScore)';
+    return 'Product(id: $id, title: $title, breadcrumbs: $breadcrumbs, imageType: $imageType, image: $image, images: $images, badges: $badges, importantBadges: $importantBadges, category: $category, ingredientCount: $ingredientCount, generatedText: $generatedText, ingredientList: $ingredientList, ingredients: $ingredients, likes: $likes, aisle: $aisle, nutrition: $nutrition, price: $price, servings: $servings, spoonacularScore: $spoonacularScore)';
   }
 
   @override
@@ -506,9 +507,9 @@ class _$ProductImpl extends _Product {
             (identical(other.generatedText, generatedText) ||
                 other.generatedText == generatedText) &&
             const DeepCollectionEquality()
-                .equals(other._ingredients, _ingredients) &&
-            const DeepCollectionEquality()
                 .equals(other._ingredientList, _ingredientList) &&
+            const DeepCollectionEquality()
+                .equals(other._ingredients, _ingredients) &&
             (identical(other.likes, likes) || other.likes == likes) &&
             (identical(other.aisle, aisle) || other.aisle == aisle) &&
             (identical(other.nutrition, nutrition) ||
@@ -535,8 +536,8 @@ class _$ProductImpl extends _Product {
         category,
         ingredientCount,
         generatedText,
-        const DeepCollectionEquality().hash(_ingredients),
         const DeepCollectionEquality().hash(_ingredientList),
+        const DeepCollectionEquality().hash(_ingredients),
         likes,
         aisle,
         nutrition,
@@ -572,8 +573,8 @@ abstract class _Product extends Product {
       final String? category,
       final int? ingredientCount,
       final String? generatedText,
-      final List<String>? ingredients,
-      final List<Ingredient>? ingredientList,
+      final List<IngredientMapEntry>? ingredientList,
+      final List<Ingredient>? ingredients,
       final int? likes,
       final String? aisle,
       final Nutrition? nutrition,
@@ -607,9 +608,9 @@ abstract class _Product extends Product {
   @override
   String? get generatedText;
   @override
-  List<String>? get ingredients;
+  List<IngredientMapEntry>? get ingredientList;
   @override
-  List<Ingredient>? get ingredientList;
+  List<Ingredient>? get ingredients;
   @override
   int? get likes;
   @override
@@ -625,6 +626,171 @@ abstract class _Product extends Product {
   @override
   @JsonKey(ignore: true)
   _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+IngredientMapEntry _$IngredientMapEntryFromJson(Map<String, dynamic> json) {
+  return _IngredientMapEntry.fromJson(json);
+}
+
+/// @nodoc
+mixin _$IngredientMapEntry {
+  String? get key => throw _privateConstructorUsedError;
+  List<String>? get values => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $IngredientMapEntryCopyWith<IngredientMapEntry> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $IngredientMapEntryCopyWith<$Res> {
+  factory $IngredientMapEntryCopyWith(
+          IngredientMapEntry value, $Res Function(IngredientMapEntry) then) =
+      _$IngredientMapEntryCopyWithImpl<$Res, IngredientMapEntry>;
+  @useResult
+  $Res call({String? key, List<String>? values});
+}
+
+/// @nodoc
+class _$IngredientMapEntryCopyWithImpl<$Res, $Val extends IngredientMapEntry>
+    implements $IngredientMapEntryCopyWith<$Res> {
+  _$IngredientMapEntryCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? key = freezed,
+    Object? values = freezed,
+  }) {
+    return _then(_value.copyWith(
+      key: freezed == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as String?,
+      values: freezed == values
+          ? _value.values
+          : values // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$IngredientMapEntryImplCopyWith<$Res>
+    implements $IngredientMapEntryCopyWith<$Res> {
+  factory _$$IngredientMapEntryImplCopyWith(_$IngredientMapEntryImpl value,
+          $Res Function(_$IngredientMapEntryImpl) then) =
+      __$$IngredientMapEntryImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? key, List<String>? values});
+}
+
+/// @nodoc
+class __$$IngredientMapEntryImplCopyWithImpl<$Res>
+    extends _$IngredientMapEntryCopyWithImpl<$Res, _$IngredientMapEntryImpl>
+    implements _$$IngredientMapEntryImplCopyWith<$Res> {
+  __$$IngredientMapEntryImplCopyWithImpl(_$IngredientMapEntryImpl _value,
+      $Res Function(_$IngredientMapEntryImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? key = freezed,
+    Object? values = freezed,
+  }) {
+    return _then(_$IngredientMapEntryImpl(
+      key: freezed == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as String?,
+      values: freezed == values
+          ? _value._values
+          : values // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$IngredientMapEntryImpl extends _IngredientMapEntry {
+  _$IngredientMapEntryImpl({this.key, final List<String>? values})
+      : _values = values,
+        super._();
+
+  factory _$IngredientMapEntryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$IngredientMapEntryImplFromJson(json);
+
+  @override
+  final String? key;
+  final List<String>? _values;
+  @override
+  List<String>? get values {
+    final value = _values;
+    if (value == null) return null;
+    if (_values is EqualUnmodifiableListView) return _values;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'IngredientMapEntry(key: $key, values: $values)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$IngredientMapEntryImpl &&
+            (identical(other.key, key) || other.key == key) &&
+            const DeepCollectionEquality().equals(other._values, _values));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, key, const DeepCollectionEquality().hash(_values));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$IngredientMapEntryImplCopyWith<_$IngredientMapEntryImpl> get copyWith =>
+      __$$IngredientMapEntryImplCopyWithImpl<_$IngredientMapEntryImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$IngredientMapEntryImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _IngredientMapEntry extends IngredientMapEntry {
+  factory _IngredientMapEntry({final String? key, final List<String>? values}) =
+      _$IngredientMapEntryImpl;
+  _IngredientMapEntry._() : super._();
+
+  factory _IngredientMapEntry.fromJson(Map<String, dynamic> json) =
+      _$IngredientMapEntryImpl.fromJson;
+
+  @override
+  String? get key;
+  @override
+  List<String>? get values;
+  @override
+  @JsonKey(ignore: true)
+  _$$IngredientMapEntryImplCopyWith<_$IngredientMapEntryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

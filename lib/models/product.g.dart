@@ -76,12 +76,13 @@ const ProductSchema = CollectionSchema(
       id: 11,
       name: r'ingredientList',
       type: IsarType.objectList,
-      target: r'Ingredient',
+      target: r'IngredientMapEntry',
     ),
     r'ingredients': PropertySchema(
       id: 12,
       name: r'ingredients',
-      type: IsarType.stringList,
+      type: IsarType.objectList,
+      target: r'Ingredient',
     ),
     r'likes': PropertySchema(
       id: 13,
@@ -124,6 +125,7 @@ const ProductSchema = CollectionSchema(
   indexes: {},
   links: {},
   embeddedSchemas: {
+    r'IngredientMapEntry': IngredientMapEntrySchema,
     r'Ingredient': IngredientSchema,
     r'Nutrition': NutritionSchema,
     r'Nutrient': NutrientSchema,
@@ -220,11 +222,11 @@ int _productEstimateSize(
     if (list != null) {
       bytesCount += 3 + list.length * 3;
       {
-        final offsets = allOffsets[Ingredient]!;
+        final offsets = allOffsets[IngredientMapEntry]!;
         for (var i = 0; i < list.length; i++) {
           final value = list[i];
           bytesCount +=
-              IngredientSchema.estimateSize(value, offsets, allOffsets);
+              IngredientMapEntrySchema.estimateSize(value, offsets, allOffsets);
         }
       }
     }
@@ -234,9 +236,11 @@ int _productEstimateSize(
     if (list != null) {
       bytesCount += 3 + list.length * 3;
       {
+        final offsets = allOffsets[Ingredient]!;
         for (var i = 0; i < list.length; i++) {
           final value = list[i];
-          bytesCount += value.length * 3;
+          bytesCount +=
+              IngredientSchema.estimateSize(value, offsets, allOffsets);
         }
       }
     }
@@ -282,13 +286,18 @@ void _productSerialize(
   writer.writeStringList(offsets[8], object.images);
   writer.writeStringList(offsets[9], object.importantBadges);
   writer.writeLong(offsets[10], object.ingredientCount);
-  writer.writeObjectList<Ingredient>(
+  writer.writeObjectList<IngredientMapEntry>(
     offsets[11],
     allOffsets,
-    IngredientSchema.serialize,
+    IngredientMapEntrySchema.serialize,
     object.ingredientList,
   );
-  writer.writeStringList(offsets[12], object.ingredients);
+  writer.writeObjectList<Ingredient>(
+    offsets[12],
+    allOffsets,
+    IngredientSchema.serialize,
+    object.ingredients,
+  );
   writer.writeLong(offsets[13], object.likes);
   writer.writeObject<Nutrition>(
     offsets[14],
@@ -325,9 +334,14 @@ Product _productDeserialize(
     reader.readStringOrNull(offsets[3]),
     reader.readLongOrNull(offsets[10]),
     reader.readStringOrNull(offsets[4]),
-    reader.readStringList(offsets[12]),
-    reader.readObjectList<Ingredient>(
+    reader.readObjectList<IngredientMapEntry>(
       offsets[11],
+      IngredientMapEntrySchema.deserialize,
+      allOffsets,
+      IngredientMapEntry(),
+    ),
+    reader.readObjectList<Ingredient>(
+      offsets[12],
       IngredientSchema.deserialize,
       allOffsets,
       Ingredient(),
@@ -380,14 +394,19 @@ P _productDeserializeProp<P>(
     case 10:
       return (reader.readLongOrNull(offset)) as P;
     case 11:
+      return (reader.readObjectList<IngredientMapEntry>(
+        offset,
+        IngredientMapEntrySchema.deserialize,
+        allOffsets,
+        IngredientMapEntry(),
+      )) as P;
+    case 12:
       return (reader.readObjectList<Ingredient>(
         offset,
         IngredientSchema.deserialize,
         allOffsets,
         Ingredient(),
       )) as P;
-    case 12:
-      return (reader.readStringList(offset)) as P;
     case 13:
       return (reader.readLongOrNull(offset)) as P;
     case 14:
@@ -2430,142 +2449,6 @@ extension ProductQueryFilter
   }
 
   QueryBuilder<Product, Product, QAfterFilterCondition>
-      ingredientsElementEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'ingredients',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition>
-      ingredientsElementGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'ingredients',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition>
-      ingredientsElementLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'ingredients',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition>
-      ingredientsElementBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'ingredients',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition>
-      ingredientsElementStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'ingredients',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition>
-      ingredientsElementEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'ingredients',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition>
-      ingredientsElementContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'ingredients',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition>
-      ingredientsElementMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'ingredients',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition>
-      ingredientsElementIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'ingredients',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition>
-      ingredientsElementIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'ingredients',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Product, Product, QAfterFilterCondition>
       ingredientsLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
@@ -3117,9 +3000,16 @@ extension ProductQueryFilter
 extension ProductQueryObject
     on QueryBuilder<Product, Product, QFilterCondition> {
   QueryBuilder<Product, Product, QAfterFilterCondition> ingredientListElement(
-      FilterQuery<Ingredient> q) {
+      FilterQuery<IngredientMapEntry> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, r'ingredientList');
+    });
+  }
+
+  QueryBuilder<Product, Product, QAfterFilterCondition> ingredientsElement(
+      FilterQuery<Ingredient> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'ingredients');
     });
   }
 
@@ -3496,12 +3386,6 @@ extension ProductQueryWhereDistinct
     });
   }
 
-  QueryBuilder<Product, Product, QDistinct> distinctByIngredients() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'ingredients');
-    });
-  }
-
   QueryBuilder<Product, Product, QDistinct> distinctByLikes() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'likes');
@@ -3603,14 +3487,15 @@ extension ProductQueryProperty
     });
   }
 
-  QueryBuilder<Product, List<Ingredient>?, QQueryOperations>
+  QueryBuilder<Product, List<IngredientMapEntry>?, QQueryOperations>
       ingredientListProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'ingredientList');
     });
   }
 
-  QueryBuilder<Product, List<String>?, QQueryOperations> ingredientsProperty() {
+  QueryBuilder<Product, List<Ingredient>?, QQueryOperations>
+      ingredientsProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'ingredients');
     });
@@ -3656,6 +3541,499 @@ extension ProductQueryProperty
 // **************************************************************************
 // IsarEmbeddedGenerator
 // **************************************************************************
+
+// coverage:ignore-file
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
+
+const IngredientMapEntrySchema = Schema(
+  name: r'IngredientMapEntry',
+  id: -5600266233364256271,
+  properties: {
+    r'key': PropertySchema(
+      id: 0,
+      name: r'key',
+      type: IsarType.string,
+    ),
+    r'values': PropertySchema(
+      id: 1,
+      name: r'values',
+      type: IsarType.stringList,
+    )
+  },
+  estimateSize: _ingredientMapEntryEstimateSize,
+  serialize: _ingredientMapEntrySerialize,
+  deserialize: _ingredientMapEntryDeserialize,
+  deserializeProp: _ingredientMapEntryDeserializeProp,
+);
+
+int _ingredientMapEntryEstimateSize(
+  IngredientMapEntry object,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  var bytesCount = offsets.last;
+  {
+    final value = object.key;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final list = object.values;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount += value.length * 3;
+        }
+      }
+    }
+  }
+  return bytesCount;
+}
+
+void _ingredientMapEntrySerialize(
+  IngredientMapEntry object,
+  IsarWriter writer,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  writer.writeString(offsets[0], object.key);
+  writer.writeStringList(offsets[1], object.values);
+}
+
+IngredientMapEntry _ingredientMapEntryDeserialize(
+  Id id,
+  IsarReader reader,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  final object = IngredientMapEntry(
+    key: reader.readStringOrNull(offsets[0]),
+    values: reader.readStringList(offsets[1]),
+  );
+  return object;
+}
+
+P _ingredientMapEntryDeserializeProp<P>(
+  IsarReader reader,
+  int propertyId,
+  int offset,
+  Map<Type, List<int>> allOffsets,
+) {
+  switch (propertyId) {
+    case 0:
+      return (reader.readStringOrNull(offset)) as P;
+    case 1:
+      return (reader.readStringList(offset)) as P;
+    default:
+      throw IsarError('Unknown property with id $propertyId');
+  }
+}
+
+extension IngredientMapEntryQueryFilter
+    on QueryBuilder<IngredientMapEntry, IngredientMapEntry, QFilterCondition> {
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      keyIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'key',
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      keyIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'key',
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      keyEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'key',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      keyGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'key',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      keyLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'key',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      keyBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'key',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      keyStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'key',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      keyEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'key',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      keyContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'key',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      keyMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'key',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      keyIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'key',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      keyIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'key',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'values',
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'values',
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesElementEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'values',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesElementGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'values',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesElementLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'values',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesElementBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'values',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesElementStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'values',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesElementEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'values',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesElementContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'values',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesElementMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'values',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesElementIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'values',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesElementIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'values',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'values',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'values',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'values',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'values',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'values',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<IngredientMapEntry, IngredientMapEntry, QAfterFilterCondition>
+      valuesLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'values',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+}
+
+extension IngredientMapEntryQueryObject
+    on QueryBuilder<IngredientMapEntry, IngredientMapEntry, QFilterCondition> {}
 
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
@@ -5940,8 +6318,10 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
       json['category'] as String?,
       (json['ingredient_count'] as num?)?.toInt(),
       json['generated_text'] as String?,
-      (json['ingredients'] as List<dynamic>?)?.map((e) => e as String).toList(),
       (json['ingredient_list'] as List<dynamic>?)
+          ?.map((e) => IngredientMapEntry.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['ingredients'] as List<dynamic>?)
           ?.map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
           .toList(),
       (json['likes'] as num?)?.toInt(),
@@ -5969,14 +6349,29 @@ Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
       'category': instance.category,
       'ingredient_count': instance.ingredientCount,
       'generated_text': instance.generatedText,
-      'ingredients': instance.ingredients,
       'ingredient_list': instance.ingredientList,
+      'ingredients': instance.ingredients,
       'likes': instance.likes,
       'aisle': instance.aisle,
       'nutrition': instance.nutrition,
       'price': instance.price,
       'servings': instance.servings,
       'spoonacular_score': instance.spoonacularScore,
+    };
+
+_$IngredientMapEntryImpl _$$IngredientMapEntryImplFromJson(
+        Map<String, dynamic> json) =>
+    _$IngredientMapEntryImpl(
+      key: json['key'] as String?,
+      values:
+          (json['values'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$$IngredientMapEntryImplToJson(
+        _$IngredientMapEntryImpl instance) =>
+    <String, dynamic>{
+      'key': instance.key,
+      'values': instance.values,
     };
 
 _$IngredientImpl _$$IngredientImplFromJson(Map<String, dynamic> json) =>

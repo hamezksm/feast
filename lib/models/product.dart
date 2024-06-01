@@ -21,8 +21,8 @@ class Product with _$Product {
     String? category,
     int? ingredientCount,
     String? generatedText,
-    List<String>? ingredients,
-    List<Ingredient>? ingredientList,
+    List<IngredientMapEntry>? ingredientList,
+    List<Ingredient>? ingredients,
     int? likes,
     String? aisle,
     Nutrition? nutrition,
@@ -33,8 +33,39 @@ class Product with _$Product {
 
   Id get isarId => Isar.autoIncrement;
 
+  // Convert Map<String, List<String>> to List<IngredientMapEntry>
+  Product copyWithIngredientList(Map<String?, List<String>?> map) {
+    return copyWith(
+        ingredientList: map.entries
+            .map((entry) => IngredientMapEntry(
+                  key: entry.key,
+                  values: entry.value,
+                ))
+            .toList());
+  }
+
+  // Convert List<IngredientMapEntry> back to Map<String, List<String>>
+  Map<String?, List<String>?> getIngredientList() {
+    return Map.fromEntries(
+        ingredientList!.map((entry) => MapEntry(entry.key, entry.values)));
+  }
+
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
+}
+
+@freezed
+@Embedded(ignore: {'copyWith'})
+class IngredientMapEntry with _$IngredientMapEntry {
+  const IngredientMapEntry._();
+
+  factory IngredientMapEntry({
+    String? key,
+    List<String>? values,
+  }) = _IngredientMapEntry;
+
+  factory IngredientMapEntry.fromJson(Map<String, dynamic> json) =>
+      _$IngredientMapEntryFromJson(json);
 }
 
 @freezed

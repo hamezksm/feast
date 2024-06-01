@@ -13,7 +13,7 @@ class IsarService {
     if (Isar.instanceNames.isEmpty) {
       final dir = await getApplicationDocumentsDirectory();
       final isar = await Isar.open(
-        [ProductSchema], // Here we will add a schema's
+        [ProductSchema], // Add the schemas here
         directory: dir.path,
         inspector: true,
       );
@@ -23,14 +23,14 @@ class IsarService {
     return Future.value(Isar.getInstance());
   }
 
-  Future<void> saveProducts(Product product) async {
+  Future<void> saveProduct(Product product) async {
     final isar = await db;
-    isar.writeTxnSync(() {
-      isar.products.put(product);
+    await isar.writeTxn(() async {
+      await isar.products.put(product);
     });
   }
 
-  Future<List<Product>> getProduct() async {
+  Future<List<Product>> getProducts() async {
     final isar = await db;
     return isar.products.where().findAll();
   }
