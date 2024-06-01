@@ -21,21 +21,24 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Product {
   int? get id => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
-  List<String> get breadcrumbs => throw _privateConstructorUsedError;
-  String get imageType => throw _privateConstructorUsedError;
-  List<String> get badges => throw _privateConstructorUsedError;
-  List<String> get importantBadges => throw _privateConstructorUsedError;
-  int get ingredientCount => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
+  List<String>? get breadcrumbs => throw _privateConstructorUsedError;
+  String? get imageType => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
+  List<String> get images => throw _privateConstructorUsedError;
+  List<String>? get badges => throw _privateConstructorUsedError;
+  List<String>? get importantBadges => throw _privateConstructorUsedError;
+  String? get category => throw _privateConstructorUsedError;
+  int? get ingredientCount => throw _privateConstructorUsedError;
   String? get generatedText => throw _privateConstructorUsedError;
-  String get ingredients => throw _privateConstructorUsedError;
-  List<Ingredient> get ingredientList => throw _privateConstructorUsedError;
-  int get likes => throw _privateConstructorUsedError;
-  String get aisle => throw _privateConstructorUsedError;
-  Nutrition get nutrition => throw _privateConstructorUsedError;
-  double get price => throw _privateConstructorUsedError;
-  Servings get servings => throw _privateConstructorUsedError;
-  double get spoonacularScore => throw _privateConstructorUsedError;
+  List<String>? get ingredients => throw _privateConstructorUsedError;
+  List<Ingredient>? get ingredientList => throw _privateConstructorUsedError;
+  int? get likes => throw _privateConstructorUsedError;
+  String? get aisle => throw _privateConstructorUsedError;
+  Nutrition? get nutrition => throw _privateConstructorUsedError;
+  double? get price => throw _privateConstructorUsedError;
+  Servings? get servings => throw _privateConstructorUsedError;
+  double? get spoonacularScore => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,24 +52,27 @@ abstract class $ProductCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      String title,
-      List<String> breadcrumbs,
-      String imageType,
-      List<String> badges,
-      List<String> importantBadges,
-      int ingredientCount,
+      String? title,
+      List<String>? breadcrumbs,
+      String? imageType,
+      String? image,
+      List<String> images,
+      List<String>? badges,
+      List<String>? importantBadges,
+      String? category,
+      int? ingredientCount,
       String? generatedText,
-      String ingredients,
-      List<Ingredient> ingredientList,
-      int likes,
-      String aisle,
-      Nutrition nutrition,
-      double price,
-      Servings servings,
-      double spoonacularScore});
+      List<String>? ingredients,
+      List<Ingredient>? ingredientList,
+      int? likes,
+      String? aisle,
+      Nutrition? nutrition,
+      double? price,
+      Servings? servings,
+      double? spoonacularScore});
 
-  $NutritionCopyWith<$Res> get nutrition;
-  $ServingsCopyWith<$Res> get servings;
+  $NutritionCopyWith<$Res>? get nutrition;
+  $ServingsCopyWith<$Res>? get servings;
 }
 
 /// @nodoc
@@ -83,102 +89,125 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
   @override
   $Res call({
     Object? id = freezed,
-    Object? title = null,
-    Object? breadcrumbs = null,
-    Object? imageType = null,
-    Object? badges = null,
-    Object? importantBadges = null,
-    Object? ingredientCount = null,
+    Object? title = freezed,
+    Object? breadcrumbs = freezed,
+    Object? imageType = freezed,
+    Object? image = freezed,
+    Object? images = null,
+    Object? badges = freezed,
+    Object? importantBadges = freezed,
+    Object? category = freezed,
+    Object? ingredientCount = freezed,
     Object? generatedText = freezed,
-    Object? ingredients = null,
-    Object? ingredientList = null,
-    Object? likes = null,
-    Object? aisle = null,
-    Object? nutrition = null,
-    Object? price = null,
-    Object? servings = null,
-    Object? spoonacularScore = null,
+    Object? ingredients = freezed,
+    Object? ingredientList = freezed,
+    Object? likes = freezed,
+    Object? aisle = freezed,
+    Object? nutrition = freezed,
+    Object? price = freezed,
+    Object? servings = freezed,
+    Object? spoonacularScore = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      title: null == title
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      breadcrumbs: null == breadcrumbs
+              as String?,
+      breadcrumbs: freezed == breadcrumbs
           ? _value.breadcrumbs
           : breadcrumbs // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      imageType: null == imageType
+              as List<String>?,
+      imageType: freezed == imageType
           ? _value.imageType
           : imageType // ignore: cast_nullable_to_non_nullable
-              as String,
-      badges: null == badges
+              as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
+      images: null == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      badges: freezed == badges
           ? _value.badges
           : badges // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      importantBadges: null == importantBadges
+              as List<String>?,
+      importantBadges: freezed == importantBadges
           ? _value.importantBadges
           : importantBadges // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      ingredientCount: null == ingredientCount
+              as List<String>?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ingredientCount: freezed == ingredientCount
           ? _value.ingredientCount
           : ingredientCount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       generatedText: freezed == generatedText
           ? _value.generatedText
           : generatedText // ignore: cast_nullable_to_non_nullable
               as String?,
-      ingredients: null == ingredients
+      ingredients: freezed == ingredients
           ? _value.ingredients
           : ingredients // ignore: cast_nullable_to_non_nullable
-              as String,
-      ingredientList: null == ingredientList
+              as List<String>?,
+      ingredientList: freezed == ingredientList
           ? _value.ingredientList
           : ingredientList // ignore: cast_nullable_to_non_nullable
-              as List<Ingredient>,
-      likes: null == likes
+              as List<Ingredient>?,
+      likes: freezed == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as int,
-      aisle: null == aisle
+              as int?,
+      aisle: freezed == aisle
           ? _value.aisle
           : aisle // ignore: cast_nullable_to_non_nullable
-              as String,
-      nutrition: null == nutrition
+              as String?,
+      nutrition: freezed == nutrition
           ? _value.nutrition
           : nutrition // ignore: cast_nullable_to_non_nullable
-              as Nutrition,
-      price: null == price
+              as Nutrition?,
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as double,
-      servings: null == servings
+              as double?,
+      servings: freezed == servings
           ? _value.servings
           : servings // ignore: cast_nullable_to_non_nullable
-              as Servings,
-      spoonacularScore: null == spoonacularScore
+              as Servings?,
+      spoonacularScore: freezed == spoonacularScore
           ? _value.spoonacularScore
           : spoonacularScore // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $NutritionCopyWith<$Res> get nutrition {
-    return $NutritionCopyWith<$Res>(_value.nutrition, (value) {
+  $NutritionCopyWith<$Res>? get nutrition {
+    if (_value.nutrition == null) {
+      return null;
+    }
+
+    return $NutritionCopyWith<$Res>(_value.nutrition!, (value) {
       return _then(_value.copyWith(nutrition: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ServingsCopyWith<$Res> get servings {
-    return $ServingsCopyWith<$Res>(_value.servings, (value) {
+  $ServingsCopyWith<$Res>? get servings {
+    if (_value.servings == null) {
+      return null;
+    }
+
+    return $ServingsCopyWith<$Res>(_value.servings!, (value) {
       return _then(_value.copyWith(servings: value) as $Val);
     });
   }
@@ -193,26 +222,29 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      String title,
-      List<String> breadcrumbs,
-      String imageType,
-      List<String> badges,
-      List<String> importantBadges,
-      int ingredientCount,
+      String? title,
+      List<String>? breadcrumbs,
+      String? imageType,
+      String? image,
+      List<String> images,
+      List<String>? badges,
+      List<String>? importantBadges,
+      String? category,
+      int? ingredientCount,
       String? generatedText,
-      String ingredients,
-      List<Ingredient> ingredientList,
-      int likes,
-      String aisle,
-      Nutrition nutrition,
-      double price,
-      Servings servings,
-      double spoonacularScore});
+      List<String>? ingredients,
+      List<Ingredient>? ingredientList,
+      int? likes,
+      String? aisle,
+      Nutrition? nutrition,
+      double? price,
+      Servings? servings,
+      double? spoonacularScore});
 
   @override
-  $NutritionCopyWith<$Res> get nutrition;
+  $NutritionCopyWith<$Res>? get nutrition;
   @override
-  $ServingsCopyWith<$Res> get servings;
+  $ServingsCopyWith<$Res>? get servings;
 }
 
 /// @nodoc
@@ -227,87 +259,102 @@ class __$$ProductImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? title = null,
-    Object? breadcrumbs = null,
-    Object? imageType = null,
-    Object? badges = null,
-    Object? importantBadges = null,
-    Object? ingredientCount = null,
+    Object? title = freezed,
+    Object? breadcrumbs = freezed,
+    Object? imageType = freezed,
+    Object? image = freezed,
+    Object? images = null,
+    Object? badges = freezed,
+    Object? importantBadges = freezed,
+    Object? category = freezed,
+    Object? ingredientCount = freezed,
     Object? generatedText = freezed,
-    Object? ingredients = null,
-    Object? ingredientList = null,
-    Object? likes = null,
-    Object? aisle = null,
-    Object? nutrition = null,
-    Object? price = null,
-    Object? servings = null,
-    Object? spoonacularScore = null,
+    Object? ingredients = freezed,
+    Object? ingredientList = freezed,
+    Object? likes = freezed,
+    Object? aisle = freezed,
+    Object? nutrition = freezed,
+    Object? price = freezed,
+    Object? servings = freezed,
+    Object? spoonacularScore = freezed,
   }) {
     return _then(_$ProductImpl(
       freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      null == title
+      freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == breadcrumbs
+              as String?,
+      freezed == breadcrumbs
           ? _value._breadcrumbs
           : breadcrumbs // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      null == imageType
+              as List<String>?,
+      freezed == imageType
           ? _value.imageType
           : imageType // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == badges
+              as String?,
+      freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
+      null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      freezed == badges
           ? _value._badges
           : badges // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      null == importantBadges
+              as List<String>?,
+      freezed == importantBadges
           ? _value._importantBadges
           : importantBadges // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      null == ingredientCount
+              as List<String>?,
+      freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String?,
+      freezed == ingredientCount
           ? _value.ingredientCount
           : ingredientCount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       freezed == generatedText
           ? _value.generatedText
           : generatedText // ignore: cast_nullable_to_non_nullable
               as String?,
-      null == ingredients
-          ? _value.ingredients
+      freezed == ingredients
+          ? _value._ingredients
           : ingredients // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == ingredientList
+              as List<String>?,
+      freezed == ingredientList
           ? _value._ingredientList
           : ingredientList // ignore: cast_nullable_to_non_nullable
-              as List<Ingredient>,
-      null == likes
+              as List<Ingredient>?,
+      freezed == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as int,
-      null == aisle
+              as int?,
+      freezed == aisle
           ? _value.aisle
           : aisle // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == nutrition
+              as String?,
+      freezed == nutrition
           ? _value.nutrition
           : nutrition // ignore: cast_nullable_to_non_nullable
-              as Nutrition,
-      null == price
+              as Nutrition?,
+      freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as double,
-      null == servings
+              as double?,
+      freezed == servings
           ? _value.servings
           : servings // ignore: cast_nullable_to_non_nullable
-              as Servings,
-      null == spoonacularScore
+              as Servings?,
+      freezed == spoonacularScore
           ? _value.spoonacularScore
           : spoonacularScore // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
     ));
   }
 }
@@ -318,14 +365,17 @@ class _$ProductImpl extends _Product {
   _$ProductImpl(
       this.id,
       this.title,
-      final List<String> breadcrumbs,
+      final List<String>? breadcrumbs,
       this.imageType,
-      final List<String> badges,
-      final List<String> importantBadges,
+      this.image,
+      final List<String> images,
+      final List<String>? badges,
+      final List<String>? importantBadges,
+      this.category,
       this.ingredientCount,
       this.generatedText,
-      this.ingredients,
-      final List<Ingredient> ingredientList,
+      final List<String>? ingredients,
+      final List<Ingredient>? ingredientList,
       this.likes,
       this.aisle,
       this.nutrition,
@@ -333,8 +383,10 @@ class _$ProductImpl extends _Product {
       this.servings,
       this.spoonacularScore)
       : _breadcrumbs = breadcrumbs,
+        _images = images,
         _badges = badges,
         _importantBadges = importantBadges,
+        _ingredients = ingredients,
         _ingredientList = ingredientList,
         super._();
 
@@ -344,63 +396,91 @@ class _$ProductImpl extends _Product {
   @override
   final int? id;
   @override
-  final String title;
-  final List<String> _breadcrumbs;
+  final String? title;
+  final List<String>? _breadcrumbs;
   @override
-  List<String> get breadcrumbs {
+  List<String>? get breadcrumbs {
+    final value = _breadcrumbs;
+    if (value == null) return null;
     if (_breadcrumbs is EqualUnmodifiableListView) return _breadcrumbs;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_breadcrumbs);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final String imageType;
-  final List<String> _badges;
+  final String? imageType;
   @override
-  List<String> get badges {
+  final String? image;
+  final List<String> _images;
+  @override
+  List<String> get images {
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_images);
+  }
+
+  final List<String>? _badges;
+  @override
+  List<String>? get badges {
+    final value = _badges;
+    if (value == null) return null;
     if (_badges is EqualUnmodifiableListView) return _badges;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_badges);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<String> _importantBadges;
+  final List<String>? _importantBadges;
   @override
-  List<String> get importantBadges {
+  List<String>? get importantBadges {
+    final value = _importantBadges;
+    if (value == null) return null;
     if (_importantBadges is EqualUnmodifiableListView) return _importantBadges;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_importantBadges);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final int ingredientCount;
+  final String? category;
+  @override
+  final int? ingredientCount;
   @override
   final String? generatedText;
+  final List<String>? _ingredients;
   @override
-  final String ingredients;
-  final List<Ingredient> _ingredientList;
+  List<String>? get ingredients {
+    final value = _ingredients;
+    if (value == null) return null;
+    if (_ingredients is EqualUnmodifiableListView) return _ingredients;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Ingredient>? _ingredientList;
   @override
-  List<Ingredient> get ingredientList {
+  List<Ingredient>? get ingredientList {
+    final value = _ingredientList;
+    if (value == null) return null;
     if (_ingredientList is EqualUnmodifiableListView) return _ingredientList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_ingredientList);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final int likes;
+  final int? likes;
   @override
-  final String aisle;
+  final String? aisle;
   @override
-  final Nutrition nutrition;
+  final Nutrition? nutrition;
   @override
-  final double price;
+  final double? price;
   @override
-  final Servings servings;
+  final Servings? servings;
   @override
-  final double spoonacularScore;
+  final double? spoonacularScore;
 
   @override
   String toString() {
-    return 'Product(id: $id, title: $title, breadcrumbs: $breadcrumbs, imageType: $imageType, badges: $badges, importantBadges: $importantBadges, ingredientCount: $ingredientCount, generatedText: $generatedText, ingredients: $ingredients, ingredientList: $ingredientList, likes: $likes, aisle: $aisle, nutrition: $nutrition, price: $price, servings: $servings, spoonacularScore: $spoonacularScore)';
+    return 'Product(id: $id, title: $title, breadcrumbs: $breadcrumbs, imageType: $imageType, image: $image, images: $images, badges: $badges, importantBadges: $importantBadges, category: $category, ingredientCount: $ingredientCount, generatedText: $generatedText, ingredients: $ingredients, ingredientList: $ingredientList, likes: $likes, aisle: $aisle, nutrition: $nutrition, price: $price, servings: $servings, spoonacularScore: $spoonacularScore)';
   }
 
   @override
@@ -414,15 +494,19 @@ class _$ProductImpl extends _Product {
                 .equals(other._breadcrumbs, _breadcrumbs) &&
             (identical(other.imageType, imageType) ||
                 other.imageType == imageType) &&
+            (identical(other.image, image) || other.image == image) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
             const DeepCollectionEquality().equals(other._badges, _badges) &&
             const DeepCollectionEquality()
                 .equals(other._importantBadges, _importantBadges) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
             (identical(other.ingredientCount, ingredientCount) ||
                 other.ingredientCount == ingredientCount) &&
             (identical(other.generatedText, generatedText) ||
                 other.generatedText == generatedText) &&
-            (identical(other.ingredients, ingredients) ||
-                other.ingredients == ingredients) &&
+            const DeepCollectionEquality()
+                .equals(other._ingredients, _ingredients) &&
             const DeepCollectionEquality()
                 .equals(other._ingredientList, _ingredientList) &&
             (identical(other.likes, likes) || other.likes == likes) &&
@@ -438,24 +522,28 @@ class _$ProductImpl extends _Product {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      title,
-      const DeepCollectionEquality().hash(_breadcrumbs),
-      imageType,
-      const DeepCollectionEquality().hash(_badges),
-      const DeepCollectionEquality().hash(_importantBadges),
-      ingredientCount,
-      generatedText,
-      ingredients,
-      const DeepCollectionEquality().hash(_ingredientList),
-      likes,
-      aisle,
-      nutrition,
-      price,
-      servings,
-      spoonacularScore);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        title,
+        const DeepCollectionEquality().hash(_breadcrumbs),
+        imageType,
+        image,
+        const DeepCollectionEquality().hash(_images),
+        const DeepCollectionEquality().hash(_badges),
+        const DeepCollectionEquality().hash(_importantBadges),
+        category,
+        ingredientCount,
+        generatedText,
+        const DeepCollectionEquality().hash(_ingredients),
+        const DeepCollectionEquality().hash(_ingredientList),
+        likes,
+        aisle,
+        nutrition,
+        price,
+        servings,
+        spoonacularScore
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -474,21 +562,24 @@ class _$ProductImpl extends _Product {
 abstract class _Product extends Product {
   factory _Product(
       final int? id,
-      final String title,
-      final List<String> breadcrumbs,
-      final String imageType,
-      final List<String> badges,
-      final List<String> importantBadges,
-      final int ingredientCount,
+      final String? title,
+      final List<String>? breadcrumbs,
+      final String? imageType,
+      final String? image,
+      final List<String> images,
+      final List<String>? badges,
+      final List<String>? importantBadges,
+      final String? category,
+      final int? ingredientCount,
       final String? generatedText,
-      final String ingredients,
-      final List<Ingredient> ingredientList,
-      final int likes,
-      final String aisle,
-      final Nutrition nutrition,
-      final double price,
-      final Servings servings,
-      final double spoonacularScore) = _$ProductImpl;
+      final List<String>? ingredients,
+      final List<Ingredient>? ingredientList,
+      final int? likes,
+      final String? aisle,
+      final Nutrition? nutrition,
+      final double? price,
+      final Servings? servings,
+      final double? spoonacularScore) = _$ProductImpl;
   _Product._() : super._();
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
@@ -496,35 +587,41 @@ abstract class _Product extends Product {
   @override
   int? get id;
   @override
-  String get title;
+  String? get title;
   @override
-  List<String> get breadcrumbs;
+  List<String>? get breadcrumbs;
   @override
-  String get imageType;
+  String? get imageType;
   @override
-  List<String> get badges;
+  String? get image;
   @override
-  List<String> get importantBadges;
+  List<String> get images;
   @override
-  int get ingredientCount;
+  List<String>? get badges;
+  @override
+  List<String>? get importantBadges;
+  @override
+  String? get category;
+  @override
+  int? get ingredientCount;
   @override
   String? get generatedText;
   @override
-  String get ingredients;
+  List<String>? get ingredients;
   @override
-  List<Ingredient> get ingredientList;
+  List<Ingredient>? get ingredientList;
   @override
-  int get likes;
+  int? get likes;
   @override
-  String get aisle;
+  String? get aisle;
   @override
-  Nutrition get nutrition;
+  Nutrition? get nutrition;
   @override
-  double get price;
+  double? get price;
   @override
-  Servings get servings;
+  Servings? get servings;
   @override
-  double get spoonacularScore;
+  double? get spoonacularScore;
   @override
   @JsonKey(ignore: true)
   _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
