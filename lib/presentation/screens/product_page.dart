@@ -12,6 +12,7 @@ class _ProductPageState extends State<ProductPage> {
   int indexCategory = 0;
   @override
   Widget build(BuildContext context) {
+    print('hello');
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBar(

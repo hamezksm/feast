@@ -89,29 +89,23 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> setupFeatures() async {
     List<Product> products = await IsarService().getAllProducts();
     if (products.isEmpty || products.length < 20) {
-      await generateRandomNumbers();
-    } else {
-      _scheduleNavigation(const Duration(seconds: 2));
+      generateRandomNumbers();
     }
+    _scheduleNavigation(const Duration(seconds: 2));
   }
 
-  Future<void> generateRandomNumbers() async {
+  void generateRandomNumbers() {
     Random random = Random();
     List<int> numbers = [];
 
     for (int i = 0; i < 20; i++) {
       int randomNumber = random.nextInt(60000) + 1;
-      numbers.add(randomNumber); 
+      numbers.add(randomNumber);
     }
 
-    try {
-      await ApiService.fetchProductsConcurrently(numbers);
-      print('All products fetched successfully');
-      _scheduleNavigation(const Duration(milliseconds: 500));
-    } catch (e) {
-      print('Error fetching products: $e');
-      _showErrorDialog("Failed to fetch products. Please check your internet connection.");
-    }
+    ApiService.fetchProductsConcurrently(numbers).catchError((error) {
+      print('Error fetching products: $error');
+    });
   }
 
   void _scheduleNavigation(Duration delay) {

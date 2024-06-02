@@ -16,10 +16,12 @@ class ApiService {
     if (_isInitialized) return;
 
     final ReceivePort mainReceivePort = ReceivePort();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? apiKey = prefs.getString('API_KEY');
 
     try {
       await Isolate.spawn(
-          _backgroundIsolate, [rootToken, mainReceivePort.sendPort]);
+          _backgroundIsolate, [rootToken, mainReceivePort.sendPort, apiKey]);
       _isolateSendPort = await mainReceivePort.first;
       _isInitialized = true;
       print('ApiService initialized successfully');
@@ -60,14 +62,12 @@ class ApiService {
   static Future<void> _backgroundIsolate(List<dynamic> args) async {
     final RootIsolateToken rootToken = args[0];
     final SendPort mainSendPort = args[1];
+    String? apiKey = args[2];
 
     BackgroundIsolateBinaryMessenger.ensureInitialized(rootToken);
 
     final ReceivePort isolateReceivePort = ReceivePort();
     mainSendPort.send(isolateReceivePort.sendPort);
-
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? apiKey = prefs.getString('API_KEY');
 
     if (apiKey != null) {
       // Use the API key
@@ -104,6 +104,7 @@ class ApiService {
           replyPort.send('done');
         }
       });
+      isolateReceivePort.close();
     } else {
       print('API Key not found');
     }
